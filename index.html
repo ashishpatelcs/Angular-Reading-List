@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Angular Reading List</title>
+  
+  
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+
+  <div ng-app="readingList">
+  <div class="container">
+    <h1>Reading List</h1>
+
+    <div class="row" ng-controller="ReadingListController as RLController">
+
+        <form name='reviewForm' class='form-horizontal' ng-submit='RLController.addBook()'>
+            <hr>
+            <section class="row well live-preview">
+              <aside class="col-sm-3">
+                  <a href="http://www.amazon.com/gp/product/{{RLController.book.isbn}}/" class="thumbnail">
+                    <img src="http://images.amazon.com/images/P/{{RLController.book.isbn}}.01.ZTZZZZZZ.jpg" alt="Cover of {{RLController.book.title}}" class="full">
+                </a>
+                <h4>{{RLController.book.rating}}/5</h4>
+              </aside>
+              
+              <div class="col-sm-9">
+                <h3><a href="http://www.amazon.com/gp/product/{{book.isbn}}/">{{RLController.book.title}}</a></h3>
+      
+                <cite class="text-muted">Written by {{RLController.book.authors.join(', ')}}</cite>
+      
+                <p>{{RLController.book.review}}</p>
+      
+                <ul class="list-inline">
+                    <li ng-repeat="genre in RLController.book.genres"> 
+                    <span class="label label-primary">{{genre}}</span> 
+                    </li>
+                </ul>
+      
+              </div>
+            </section>
+      
+            <fieldset class="form-group">
+              <label for="title" class="col-sm-1 control-label">Title:</label>
+              <span class="col-sm-10">
+                <input type="text" class="form-control" id="title" ng-model="RLController.book.title" placeholder="Title of your book...">
+              </span>
+            </fieldset>
+            <fieldset class="form-group">
+              <label for="isbn" class="col-sm-1 control-label">ISBN-10:</label>
+              <span class="col-sm-10">
+                <input type="text" class="form-control" id="isbn" max-length="10" min-length="10" ng-model="RLController.book.isbn" placeholder="no dashes, e.g. 1234567890">
+              </span>
+            </fieldset>
+            <fieldset class="form-group">
+              <label for="review" class="col-sm-1 control-label">Review</label>
+              <span class="col-sm-10">
+                <textarea class="form-control" id="review" cols="30" rows="3" ng-model="RLController.book.review" placeholder="Your review goes here..."></textarea>
+              </span>
+            </fieldset>
+            <fieldset class="form-group">
+              <label for="rating" class="col-sm-1 control-label">Rating:</label>
+              <span class="col-sm-10">
+                <select class="form-control" id="rating" value="5" ng-model="RLController.book.rating">
+                  <option>5</option>
+                  <option>4</option>
+                  <option>3</option>
+                  <option>2</option>
+                  <option>1</option>
+                </select>
+              </span>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="genres" class="col-sm-1 control-label">Genre</label>
+                <span class="col-sm-10">
+                  <select class="form-control" id="genre" ng-model="RLController.book.genres" multiple ng-options="genre for genre in RLController.genres">
+                  </select>
+                </span>
+              </fieldset>
+              <fieldset class="form-group">
+                  <label for="subm" class="col-sm-1 control-label"></label>
+                  <span class="col-sm-10">
+                    <button type="submit" class="button button-primary" id="submit">
+                      Submit 
+                    </button>
+                  </span>
+                </fieldset>
+          </form>
+ 
+      <ul class="list-unstyled col-sm-8">
+        <li class="book row" ng-repeat="book in RLController.books">
+          
+          <aside class="col-sm-3">
+             <book-cover></book-cover>
+            <h4>{{book.rating}}/5</h4>
+          </aside>
+          
+          <div class="col-sm-9">
+            <h3><a href="http://www.amazon.com/gp/product/{{book.isbn}}/">{{book.title}}</a></h3>
+
+            <cite class="text-muted">Written by {{book.authors.join(', ')}}</cite>
+
+            <p>{{book.review}}</p>
+
+            <book-genres></book-genres>
+
+          </div>
+        </li>
+      </ul>
+      
+      <aside class="col-sm-4">
+        <h4>Genres</h4>
+        <ul class="list-unstyled">
+          <li ng-repeat="genre in RLController.genres">
+            <span class="label label-primary">{{genre}}</span>
+            
+          </li>
+        </ul>
+      </aside>
+      
+    </div> <!-- clas="row"-->
+  </div> <!--class="container" -->
+</div> <!--ng-app-->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.0/angular.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>
